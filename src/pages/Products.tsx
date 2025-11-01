@@ -12,14 +12,14 @@ const Products = () => {
   const eyeglasses = Array.from({ length: 24 }, (_, i) => ({
     id: i + 1,
     name: `Classic Eyeglasses ${i + 1}`,
-    price: 149 + (i * 10),
+    price: 12490 + (i * 840),
     image: productGlasses,
   }));
   
   const sunglasses = Array.from({ length: 24 }, (_, i) => ({
     id: i + 25,
     name: `Premium Sunglasses ${i + 1}`,
-    price: 199 + (i * 10),
+    price: 16690 + (i * 840),
     image: productSunglasses,
   }));
   
@@ -44,7 +44,7 @@ const Products = () => {
                 Exquisite craftsmanship meets timeless elegance. Our signature piece 
                 featuring 24k gold-plated frames and precision-cut lenses.
               </p>
-              <p className="text-3xl font-bold text-accent mb-6">$899</p>
+              <p className="text-3xl font-bold text-accent mb-6">₹75,490</p>
               <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
                 Add to Cart
               </Button>

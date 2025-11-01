@@ -18,11 +18,11 @@ interface CartItem {
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>([
-    { id: 1, name: "Classic Eyeglasses", price: 149, quantity: 1, image: productGlasses },
-    { id: 2, name: "Premium Sunglasses", price: 199, quantity: 2, image: productSunglasses },
+    { id: 1, name: "Classic Eyeglasses", price: 12490, quantity: 1, image: productGlasses },
+    { id: 2, name: "Premium Sunglasses", price: 16690, quantity: 2, image: productSunglasses },
   ]);
   const [couponCode, setCouponCode] = useState("");
-  const shippingCharge = 10;
+  const shippingCharge = 840;
   
   const updateQuantity = (id: number, newQuantity: number) => {
     if (newQuantity < 1) return;
@@ -84,7 +84,7 @@ const Cart = () => {
                           />
                         </td>
                         <td className="p-4 font-medium">{item.name}</td>
-                        <td className="p-4">${item.price}</td>
+                        <td className="p-4">₹{item.price.toLocaleString('en-IN')}</td>
                         <td className="p-4">
                           <div className="flex items-center gap-2">
                             <Button
@@ -109,7 +109,7 @@ const Cart = () => {
                             </Button>
                           </div>
                         </td>
-                        <td className="p-4 font-bold">${item.price * item.quantity}</td>
+                        <td className="p-4 font-bold">₹{(item.price * item.quantity).toLocaleString('en-IN')}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -139,16 +139,16 @@ const Cart = () => {
               <div className="space-y-3">
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Subtotal</span>
-                  <span className="font-medium">${subtotal}</span>
+                  <span className="font-medium">₹{subtotal.toLocaleString('en-IN')}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Shipping</span>
-                  <span className="font-medium">${shippingCharge}</span>
+                  <span className="font-medium">₹{shippingCharge.toLocaleString('en-IN')}</span>
                 </div>
                 <div className="border-t border-border pt-3">
                   <div className="flex justify-between">
                     <span className="font-semibold text-lg">Total</span>
-                    <span className="font-bold text-lg text-accent">${total}</span>
+                    <span className="font-bold text-lg text-accent">₹{total.toLocaleString('en-IN')}</span>
                   </div>
                 </div>
               </div>

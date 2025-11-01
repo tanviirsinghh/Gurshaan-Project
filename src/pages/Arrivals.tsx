@@ -9,7 +9,7 @@ const Arrivals = () => {
   const newArrivals = Array.from({ length: 20 }, (_, i) => ({
     id: i + 1,
     name: i % 2 === 0 ? `New Eyeglasses ${i + 1}` : `New Sunglasses ${i + 1}`,
-    price: 179 + (i * 12),
+    price: 14990 + (i * 1008),
     image: i % 2 === 0 ? productGlasses : productSunglasses,
     isNew: true,
   }));

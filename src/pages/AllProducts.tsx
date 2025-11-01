@@ -9,7 +9,7 @@ const AllProducts = () => {
   const allProducts = Array.from({ length: 52 }, (_, i) => ({
     id: i + 1,
     name: i % 2 === 0 ? `Eyeglasses Model ${i + 1}` : `Sunglasses Model ${i + 1}`,
-    price: 129 + (i * 8),
+    price: 10790 + (i * 672),
     image: i % 2 === 0 ? productGlasses : productSunglasses,
   }));
   
