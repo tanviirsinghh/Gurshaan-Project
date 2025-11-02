@@ -1,34 +1,21 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
-import productGlasses from "@/assets/product-glasses-1.jpg";
-import productSunglasses from "@/assets/product-sunglasses-1.jpg";
+import { getNewArrivals } from "@/data/products";
 
 const Arrivals = () => {
-  // Generate new arrival products
-  const newArrivals = Array.from({ length: 20 }, (_, i) => ({
-    id: i + 1,
-    name: i % 2 === 0 ? `New Eyeglasses ${i + 1}` : `New Sunglasses ${i + 1}`,
-    price: 14990 + (i * 1008),
-    image: i % 2 === 0 ? productGlasses : productSunglasses,
-    isNew: true,
-  }));
+  const newArrivals = getNewArrivals();
   
   return (
     <div className="min-h-screen flex flex-col">
       <Navigation />
       
-      <main className="flex-1 container mx-auto px-4 py-12">
-        <div className="mb-12">
-          <h1 className="text-4xl font-bold mb-4">New Arrivals</h1>
-          <p className="text-muted-foreground">
-            Discover our latest collection of contemporary eyewear
-          </p>
-        </div>
+      <main className="flex-1 container mx-auto px-4 py-8 md:py-12">
+        <h1 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8">New Arrivals</h1>
         
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
           {newArrivals.map((product) => (
-            <ProductCard key={product.id} {...product} />
+            <ProductCard key={product.id} product={product} />
           ))}
         </div>
       </main>

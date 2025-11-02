@@ -4,24 +4,12 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
 import premiumProduct from "@/assets/premium-product.jpg";
-import productGlasses from "@/assets/product-glasses-1.jpg";
-import productSunglasses from "@/assets/product-sunglasses-1.jpg";
+import { products, getProductsByCategory } from "@/data/products";
 
 const Products = () => {
-  // Generate dummy products
-  const eyeglasses = Array.from({ length: 24 }, (_, i) => ({
-    id: i + 1,
-    name: `Classic Eyeglasses ${i + 1}`,
-    price: 12490 + (i * 840),
-    image: productGlasses,
-  }));
-  
-  const sunglasses = Array.from({ length: 24 }, (_, i) => ({
-    id: i + 25,
-    name: `Premium Sunglasses ${i + 1}`,
-    price: 16690 + (i * 840),
-    image: productSunglasses,
-  }));
+  const eyeglasses = getProductsByCategory('eyeglasses');
+  const sunglasses = getProductsByCategory('sunglasses');
+  const premiumProduct = products[0];
   
   return (
     <div className="min-h-screen flex flex-col">
@@ -29,55 +17,58 @@ const Products = () => {
       
       <main className="flex-1 container mx-auto px-4 py-12">
         {/* Featured Premium Product */}
-        <section className="mb-16">
-          <div className="grid md:grid-cols-2 gap-8 items-center bg-secondary rounded-lg overflow-hidden p-8">
+        <section className="mb-12 md:mb-16">
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-center bg-secondary rounded-lg overflow-hidden p-4 md:p-8">
             <div className="aspect-square">
               <img 
-                src={premiumProduct} 
-                alt="Premium Luxury Eyewear"
+                src={premiumProduct.image} 
+                alt={premiumProduct.name}
                 className="w-full h-full object-cover rounded-lg"
               />
             </div>
             <div>
-              <h2 className="text-4xl font-bold mb-4">Luxury Gold Collection</h2>
-              <p className="text-muted-foreground mb-6">
-                Exquisite craftsmanship meets timeless elegance. Our signature piece 
-                featuring 24k gold-plated frames and precision-cut lenses.
+              <h2 className="text-2xl md:text-4xl font-bold mb-3 md:mb-4">{premiumProduct.name}</h2>
+              <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-6">
+                {premiumProduct.description}
               </p>
-              <p className="text-3xl font-bold text-accent mb-6">₹75,490</p>
-              <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
-                Add to Cart
-              </Button>
+              <p className="text-2xl md:text-3xl font-bold text-accent mb-4 md:mb-6">
+                ₹{premiumProduct.price.toLocaleString('en-IN')}
+              </p>
+              <Link to={`/product/${premiumProduct.id}`}>
+                <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground w-full md:w-auto">
+                  View Details
+                </Button>
+              </Link>
             </div>
           </div>
         </section>
         
         {/* Eyeglasses Section */}
-        <section className="mb-16">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl font-bold">Eyeglasses</h2>
+        <section className="mb-12 md:mb-16">
+          <div className="flex items-center justify-between mb-6 md:mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold">Eyeglasses</h2>
             <Link to="/all-products?category=eyeglasses">
-              <Button variant="outline">See All</Button>
+              <Button variant="outline" size="sm">See All</Button>
             </Link>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            {eyeglasses.slice(0, 20).map((product) => (
-              <ProductCard key={product.id} {...product} />
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
+            {eyeglasses.slice(0, 5).map((product) => (
+              <ProductCard key={product.id} product={product} />
             ))}
           </div>
         </section>
         
         {/* Sunglasses Section */}
         <section>
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl font-bold">Sunglasses</h2>
+          <div className="flex items-center justify-between mb-6 md:mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold">Sunglasses</h2>
             <Link to="/all-products?category=sunglasses">
-              <Button variant="outline">See All</Button>
+              <Button variant="outline" size="sm">See All</Button>
             </Link>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            {sunglasses.slice(0, 20).map((product) => (
-              <ProductCard key={product.id} {...product} />
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
+            {sunglasses.slice(0, 5).map((product) => (
+              <ProductCard key={product.id} product={product} />
             ))}
           </div>
         </section>

@@ -5,118 +5,150 @@ import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import productGlasses from "@/assets/product-glasses-1.jpg";
-import productSunglasses from "@/assets/product-sunglasses-1.jpg";
-
-interface CartItem {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-  image: string;
-}
+import { useCart } from "@/contexts/CartContext";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([
-    { id: 1, name: "Classic Eyeglasses", price: 12490, quantity: 1, image: productGlasses },
-    { id: 2, name: "Premium Sunglasses", price: 16690, quantity: 2, image: productSunglasses },
-  ]);
+  const { items, removeFromCart, updateQuantity } = useCart();
   const [couponCode, setCouponCode] = useState("");
   const shippingCharge = 840;
   
-  const updateQuantity = (id: number, newQuantity: number) => {
-    if (newQuantity < 1) return;
-    setCartItems(items =>
-      items.map(item =>
-        item.id === id ? { ...item, quantity: newQuantity } : item
-      )
-    );
-  };
-  
-  const removeItem = (id: number) => {
-    setCartItems(items => items.filter(item => item.id !== id));
-  };
-  
-  const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  const total = subtotal + shippingCharge;
+  const subtotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const total = subtotal + (items.length > 0 ? shippingCharge : 0);
   
   return (
     <div className="min-h-screen flex flex-col">
       <Navigation />
       
-      <main className="flex-1 container mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold mb-8">Shopping Cart</h1>
+      <main className="flex-1 container mx-auto px-4 py-8 md:py-12">
+        <h1 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8">Shopping Cart</h1>
         
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Cart Items */}
-          <div className="lg:col-span-2">
-            <Card className="overflow-hidden">
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead className="bg-secondary">
-                    <tr>
-                      <th className="text-left p-4">Remove</th>
-                      <th className="text-left p-4">Product</th>
-                      <th className="text-left p-4">Name</th>
-                      <th className="text-left p-4">Price</th>
-                      <th className="text-left p-4">Quantity</th>
-                      <th className="text-left p-4">Total</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {cartItems.map((item) => (
-                      <tr key={item.id} className="border-b border-border">
-                        <td className="p-4">
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => removeItem(item.id)}
-                            className="text-destructive hover:text-destructive hover:bg-destructive/10"
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
-                        </td>
-                        <td className="p-4">
-                          <img
-                            src={item.image}
-                            alt={item.name}
-                            className="w-16 h-16 object-cover rounded"
-                          />
-                        </td>
-                        <td className="p-4 font-medium">{item.name}</td>
-                        <td className="p-4">₹{item.price.toLocaleString('en-IN')}</td>
-                        <td className="p-4">
-                          <div className="flex items-center gap-2">
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                            >
-                              -
-                            </Button>
-                            <Input
-                              type="number"
-                              value={item.quantity}
-                              onChange={(e) => updateQuantity(item.id, parseInt(e.target.value) || 1)}
-                              className="w-16 text-center"
-                            />
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                            >
-                              +
-                            </Button>
-                          </div>
-                        </td>
-                        <td className="p-4 font-bold">₹{(item.price * item.quantity).toLocaleString('en-IN')}</td>
+        {items.length === 0 ? (
+          <Card className="p-12 text-center">
+            <p className="text-muted-foreground text-lg mb-4">Your cart is empty</p>
+            <Link to="/products">
+              <Button className="bg-accent hover:bg-accent/90">Continue Shopping</Button>
+            </Link>
+          </Card>
+        ) : (
+          <div className="grid lg:grid-cols-3 gap-6 md:gap-8">
+            {/* Cart Items */}
+            <div className="lg:col-span-2">
+              <Card className="overflow-hidden">
+                {/* Desktop Table View */}
+                <div className="hidden md:block overflow-x-auto">
+                  <table className="w-full">
+                    <thead className="bg-secondary">
+                      <tr>
+                        <th className="text-left p-4 text-sm">Remove</th>
+                        <th className="text-left p-4 text-sm">Product</th>
+                        <th className="text-left p-4 text-sm">Name</th>
+                        <th className="text-left p-4 text-sm">Price</th>
+                        <th className="text-left p-4 text-sm">Quantity</th>
+                        <th className="text-left p-4 text-sm">Total</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </Card>
-          </div>
+                    </thead>
+                    <tbody>
+                      {items.map((item) => (
+                        <tr key={item.id} className="border-b border-border">
+                          <td className="p-4">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => removeFromCart(item.id)}
+                              className="text-destructive hover:text-destructive hover:bg-destructive/10"
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          </td>
+                          <td className="p-4">
+                            <img
+                              src={item.image}
+                              alt={item.name}
+                              className="w-16 h-16 object-cover rounded"
+                            />
+                          </td>
+                          <td className="p-4 font-medium">{item.name}</td>
+                          <td className="p-4">₹{item.price.toLocaleString('en-IN')}</td>
+                          <td className="p-4">
+                            <div className="flex items-center gap-2">
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                              >
+                                -
+                              </Button>
+                              <Input
+                                type="number"
+                                value={item.quantity}
+                                onChange={(e) => updateQuantity(item.id, parseInt(e.target.value) || 1)}
+                                className="w-16 text-center"
+                              />
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                              >
+                                +
+                              </Button>
+                            </div>
+                          </td>
+                          <td className="p-4 font-bold">₹{(item.price * item.quantity).toLocaleString('en-IN')}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+
+                {/* Mobile Card View */}
+                <div className="md:hidden divide-y divide-border">
+                  {items.map((item) => (
+                    <div key={item.id} className="p-4">
+                      <div className="flex gap-4 mb-4">
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="w-20 h-20 object-cover rounded"
+                        />
+                        <div className="flex-1">
+                          <h3 className="font-medium mb-1">{item.name}</h3>
+                          <p className="text-accent font-bold">₹{item.price.toLocaleString('en-IN')}</p>
+                        </div>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => removeFromCart(item.id)}
+                          className="text-destructive hover:text-destructive"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                          >
+                            -
+                          </Button>
+                          <span className="w-12 text-center font-medium">{item.quantity}</span>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                          >
+                            +
+                          </Button>
+                        </div>
+                        <div className="font-bold">₹{(item.price * item.quantity).toLocaleString('en-IN')}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Card>
+            </div>
           
           {/* Order Summary */}
           <div className="space-y-6">
@@ -157,7 +189,8 @@ const Cart = () => {
               </Button>
             </Card>
           </div>
-        </div>
+          </div>
+        )}
       </main>
       
       <Footer />
