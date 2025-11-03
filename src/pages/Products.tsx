@@ -3,13 +3,15 @@ import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
-import premiumProduct from "@/assets/premium-product.jpg";
 import { products, getProductsByCategory } from "@/data/products";
 
 const Products = () => {
+  // Get products filtered by category
   const eyeglasses = getProductsByCategory('eyeglasses');
   const sunglasses = getProductsByCategory('sunglasses');
-  const premiumProduct = products[0];
+  
+  // Featured product is the first product in the list
+  const featuredProduct = products[0];
   
   return (
     <div className="min-h-screen flex flex-col">
@@ -21,20 +23,20 @@ const Products = () => {
           <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-center bg-secondary rounded-lg overflow-hidden p-4 md:p-8">
             <div className="aspect-square">
               <img 
-                src={premiumProduct.image} 
-                alt={premiumProduct.name}
+                src={featuredProduct.image} 
+                alt={featuredProduct.name}
                 className="w-full h-full object-cover rounded-lg"
               />
             </div>
             <div>
-              <h2 className="text-2xl md:text-4xl font-bold mb-3 md:mb-4">{premiumProduct.name}</h2>
+              <h2 className="text-2xl md:text-4xl font-bold mb-3 md:mb-4">{featuredProduct.name}</h2>
               <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-6">
-                {premiumProduct.description}
+                {featuredProduct.description}
               </p>
               <p className="text-2xl md:text-3xl font-bold text-accent mb-4 md:mb-6">
-                ₹{premiumProduct.price.toLocaleString('en-IN')}
+                ₹{featuredProduct.price.toLocaleString('en-IN')}
               </p>
-              <Link to={`/product/${premiumProduct.id}`}>
+              <Link to={`/product/${featuredProduct.id}`}>
                 <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground w-full md:w-auto">
                   View Details
                 </Button>
