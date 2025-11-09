@@ -1,5 +1,5 @@
-import { Navigation, Footer, ProductCard } from "@/components/SharedComponents";
-import { products } from "@/data/products";
+import { Navigation, Footer, ProductCard } from "../components/SharedComponents";
+import { products } from "../data/products";
 
 const AllProducts = () => {
   return (

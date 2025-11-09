@@ -1,5 +1,5 @@
-import { Navigation, Footer, ProductCard } from "@/components/SharedComponents";
-import { getNewArrivals } from "@/data/products";
+import { Navigation, Footer, ProductCard } from "../components/SharedComponents";
+import { getNewArrivals } from "../data/products";
 
 const Arrivals = () => {
   const newArrivals = getNewArrivals();

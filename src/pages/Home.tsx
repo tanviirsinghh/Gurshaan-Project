@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Navigation, Footer } from "@/components/SharedComponents";
-import heroMan from "@/assets/hero-man.jpg";
-import heroWoman from "@/assets/hero-woman.jpg";
+import { Button } from "../components/ui/button";
+import { Navigation, Footer } from "../components/SharedComponents";
+import heroMan from "../assets/hero-man.jpg";
+import heroWoman from "../assets/hero-woman.jpg";
 
 const Home = () => {
   return (

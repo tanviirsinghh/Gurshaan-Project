@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Button } from "./ui/button";
+import { Card, CardContent } from "./ui/card";
+import { Badge } from "./ui/badge";
 import { ShoppingCart, Heart, Menu, X, Facebook, Instagram, Twitter } from "lucide-react";
-import { useCart } from "@/contexts/CartContext";
-import { useWishlist } from "@/contexts/WishlistContext";
-import { useToast } from "@/hooks/use-toast";
+import { useCart } from "../contexts/CartContext";
+import { useWishlist } from "../contexts/WishlistContext";
+import { useToast } from "../hooks/use-toast";
 import { useState } from "react";
-import { Product } from "@/data/products";
+import { Product } from "../data/products";
 
 // Navigation Component
 export const Navigation = () => {

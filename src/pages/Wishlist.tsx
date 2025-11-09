@@ -1,10 +1,10 @@
-import { Navigation, Footer } from "@/components/SharedComponents";
-import { useWishlist } from "@/contexts/WishlistContext";
-import { useCart } from "@/contexts/CartContext";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Navigation, Footer } from "../components/SharedComponents";
+import { useWishlist } from "../contexts/WishlistContext";
+import { useCart } from "../contexts/CartContext";
+import { Button } from "../components/ui/button";
+import { Card } from "../components/ui/card";
 import { Trash2, ShoppingCart } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { useToast } from "../hooks/use-toast";
 
 const Wishlist = () => {
   const { items, removeFromWishlist } = useWishlist();

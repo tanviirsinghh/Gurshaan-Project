@@ -1,4 +1,4 @@
-import { Navigation, Footer } from "@/components/SharedComponents";
+import { Navigation, Footer } from "../components/SharedComponents";
 
 const About = () => {
   return (

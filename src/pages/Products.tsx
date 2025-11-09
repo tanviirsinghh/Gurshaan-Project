@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Navigation, Footer, ProductCard } from "@/components/SharedComponents";
-import { products, getProductsByCategory } from "@/data/products";
+import { Button } from "../components/ui/button";
+import { Navigation, Footer, ProductCard } from "../components/SharedComponents";
+import { products, getProductsByCategory } from "../data/products";
 
 const Products = () => {
   // Get products filtered by category

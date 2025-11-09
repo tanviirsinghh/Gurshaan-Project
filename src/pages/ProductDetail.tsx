@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Navigation, Footer } from "@/components/SharedComponents";
+import { Button } from "../components/ui/button";
+import { Badge } from "../components/ui/badge";
+import { Navigation, Footer } from "../components/SharedComponents";
 import { ShoppingCart, Heart, Share2, Star } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
-import { getProductById } from "@/data/products";
-import { useCart } from "@/contexts/CartContext";
-import { useWishlist } from "@/contexts/WishlistContext";
+import { useToast } from "../hooks/use-toast";
+import { getProductById } from "../data/products";
+import { useCart } from "../contexts/CartContext";
+import { useWishlist } from "../contexts/WishlistContext";
 
 const ProductDetail = () => {
   const { id } = useParams();

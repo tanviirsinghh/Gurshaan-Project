@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Navigation, Footer } from "@/components/SharedComponents";
-import collectionMen from "@/assets/collection-men.jpg";
-import collectionWomen from "@/assets/collection-women.jpg";
+import { Button } from "../components/ui/button";
+import { Navigation, Footer } from "../components/SharedComponents";
+import collectionMen from "../assets/collection-men.jpg";
+import collectionWomen from "../assets/collection-women.jpg";
 
 const Collection = () => {
   return (
