@@ -1,6 +1,4 @@
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
-import ProductCard from "@/components/ProductCard";
+import { Navigation, Footer, ProductCard } from "@/components/SharedComponents";
 import { products } from "@/data/products";
 
 const AllProducts = () => {

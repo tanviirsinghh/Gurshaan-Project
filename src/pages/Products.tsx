@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
-import ProductCard from "@/components/ProductCard";
+import { Navigation, Footer, ProductCard } from "@/components/SharedComponents";
 import { products, getProductsByCategory } from "@/data/products";
 
 const Products = () => {

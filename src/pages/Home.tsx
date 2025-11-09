@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
+import { Navigation, Footer } from "@/components/SharedComponents";
 import heroMan from "@/assets/hero-man.jpg";
 import heroWoman from "@/assets/hero-woman.jpg";
 
